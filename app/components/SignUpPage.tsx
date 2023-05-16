@@ -1,10 +1,13 @@
+"use client";
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Apple from './../assets/apple.svg'
 import Google from './../assets/google.svg'
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -14,9 +17,13 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
+  };
+
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Ajoutez ici la logique de connexion
+    // Ajoutez ici la logique de création de compte
   };
 
   return (
@@ -48,37 +55,42 @@ const LoginPage = () => {
             onChange={handlePasswordChange}
           />
         </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
+            Confirmez le mot de passe
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="confirmPassword"
+            type="password"
+            placeholder="Confirmez le mot de passe"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+          />
+        </div>
         <div className="flex flex-col items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-12"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Se connecter
+            Créer un compte
           </button>
-            <a
+          <a
               className="bg-white w-full m-2 hover:bg-gray-100 text-gray-500 border font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-2"
               href="#"
             >
-              <i className="fab fa-google not-italic"><img src={Google} className="inline-block mx-2" alt="Apple logo"/>Se connecter avec Google</i>
+              <i className="fab fa-google not-italic"><Image src={Google} className="inline-block mx-2" alt="Apple logo"/>Créer un compte avec Google</i>
             </a>
             <a
               className="bg-black w-full m-2 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               href="#"
             >
-              <i className="fab fa-apple not-italic"><img src={Apple} className="inline-block mx-2" alt="Apple logo"/>Se connecter avec Apple</i>
+              <i className="fab fa-apple not-italic"><Image src={Apple} className="inline-block mx-2" alt="Apple logo"/>Créer un compte avec Apple</i>
             </a>
-        </div>
-        <div className="text-center mt-4">
-          <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#"
-          >
-            Mot de passe oublié ?
-          </a>
         </div>
       </form>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
