@@ -1,10 +1,11 @@
+<h1 align="center">Firebase Login System with Next.js</h1>
+
 <p align="center">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=tailwind,react,next,nodejs,firebase" />
   </a>
 </p>
 
-# Firebase Login System with Next.js
 This project is a template for setting up a login system using Firebase with Next.js. It allows users to sign up, log in, and log out using a Firebase account.
 
 # Prerequisites
