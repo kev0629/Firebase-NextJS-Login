@@ -17,9 +17,10 @@ export default function Home() {
         router.push('/login')
         return<div>Please Login to continue</div>
       }
+      console.log(user, auth)
   return (
     <main className="">
-        <button className="border m-2 p-2 rounded-xl" onClick={()=>auth.signOut}>
+        <button className="border m-2 p-2 rounded-xl" onClick={()=>auth.signOut()}>
             Logout
         </button>
     </main>
