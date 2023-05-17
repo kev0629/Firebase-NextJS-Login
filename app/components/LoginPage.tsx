@@ -6,7 +6,7 @@ import Apple from './../assets/apple.svg'
 import Google from './../assets/google.svg'
 
 import {useAuthState} from 'react-firebase-hooks/auth'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import { initFirebase } from '../firebaseApp'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -16,14 +16,15 @@ const LoginPage = () => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
   const app =  initFirebase()
+  const [user, loading] = useAuthState(auth)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter()
 
   const signIn = async () => {
     const result = await signInWithPopup( auth, provider)
     console.log(result.user)
   }
-  const [user, loading] = useAuthState(auth)
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -33,6 +34,13 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
+  if (loading){
+    return <div>Loading ...</div>
+  }
+  if (user){
+    router.push('/dashboard')
+    return<div>Loading ...</div>
+  }
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Ajoutez ici la logique de connexion
@@ -80,12 +88,11 @@ const LoginPage = () => {
             >
               <i className="fab fa-google not-italic"><Image src={Google} className="inline-block mx-2" alt="Apple logo"/>Se connecter avec Google</i>
             </div>
-            <a
+            <div
               className="bg-black w-full m-2 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              href="#"
             >
               <i className="fab fa-apple not-italic"><Image src={Apple} className="inline-block mx-2" alt="Apple logo"/>Se connecter avec Apple</i>
-            </a>
+            </div>
         </div>
         <div className="text-center mt-4">
         <Link

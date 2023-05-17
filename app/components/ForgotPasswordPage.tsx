@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
@@ -37,12 +38,12 @@ const ForgotPasswordPage = () => {
           >
             Réinitialiser le mot de passe
           </button>
-          <a
+          <Link
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 mx-5"
-            href="#"
+            href="/"
           >
             Retour à la page de connexion
-          </a>
+          </Link>
         </div>
       </form>
     </div>

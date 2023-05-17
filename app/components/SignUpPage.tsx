@@ -75,18 +75,16 @@ const SignUpPage = () => {
           >
             Créer un compte
           </button>
-          <a
+          <div
               className="bg-white w-full m-2 hover:bg-gray-100 text-gray-500 border font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-2"
-              href="#"
             >
               <i className="fab fa-google not-italic"><Image src={Google} className="inline-block mx-2" alt="Apple logo"/>Créer un compte avec Google</i>
-            </a>
-            <a
+            </div>
+            <div
               className="bg-black w-full m-2 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              href="#"
             >
               <i className="fab fa-apple not-italic"><Image src={Apple} className="inline-block mx-2" alt="Apple logo"/>Créer un compte avec Apple</i>
-            </a>
+            </div>
         </div>
       </form>
     </div>
