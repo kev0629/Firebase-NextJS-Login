@@ -31,8 +31,7 @@ Start the development server by running npm run dev or yarn dev.
 
 Open your web browser and navigate to http://localhost:3000.
 
-Project Structure
-Copy code
+```
 .
 ├── components/
 │   ├── Login.js
@@ -45,6 +44,8 @@ Copy code
 ├── firebase.js
 ├── auth.js
 └── ...
+```
+
 components/: Contains React components used in the project, such as Login, Signup, and Logout.
 pages/: Contains Next.js pages used in the project, such as the home page (index.js).
 firebase.js: Contains Firebase configuration details and initializes the Firebase app.
