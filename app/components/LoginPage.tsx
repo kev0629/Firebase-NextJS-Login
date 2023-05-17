@@ -1,10 +1,27 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Apple from './../assets/apple.svg'
 import Google from './../assets/google.svg'
 
+import {useAuthState} from 'react-firebase-hooks/auth'
+import { useRouter } from 'next/router';
+
+import { initFirebase } from '../firebaseApp'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+
 const LoginPage = () => {
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  const app =  initFirebase()
+
+  const signIn = async () => {
+    const result = await signInWithPopup( auth, provider)
+    console.log(result.user)
+  }
+  const [user, loading] = useAuthState(auth)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -57,12 +74,12 @@ const LoginPage = () => {
           >
             Se connecter
           </button>
-            <a
+            <div
               className="bg-white w-full m-2 hover:bg-gray-100 text-gray-500 border font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-2"
-              href="#"
+              onClick={signIn}
             >
               <i className="fab fa-google not-italic"><Image src={Google} className="inline-block mx-2" alt="Apple logo"/>Se connecter avec Google</i>
-            </a>
+            </div>
             <a
               className="bg-black w-full m-2 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               href="#"
@@ -71,19 +88,19 @@ const LoginPage = () => {
             </a>
         </div>
         <div className="text-center mt-4">
-        <a
+        <Link
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="#"
+              href='/signup'
             >
               Créer un compte
-            </a>
+            </Link>
           <div>
-            <a
+            <Link
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#"
+            href="/forgot"
           >
             Mot de passe oublié ?
-          </a>
+          </Link>
           </div>
         </div>
       </form>

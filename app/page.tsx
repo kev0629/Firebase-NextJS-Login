@@ -1,15 +1,19 @@
-// import Image from 'next/image'
-import ForgotPasswordPage from "./components/ForgotPasswordPage"
-import LoginPage from "./components/LoginPage"
-import SignUpPage from "./components/SignUpPage"
-
-
-export default function Home() {
-  return (
-    <main className="">
-      {/* <LoginPage/> */}
-      {/* <ForgotPasswordPage/> */}
-      {/* <SignUpPage/> */}
-    </main>
-  )
+"use client";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+ 
+// Here you would fetch and return the user
+const useUser = () => ({ user: null, loading: false });
+ 
+export default function Page() {
+  const { user, loading } = useUser();
+  const router = useRouter();
+ 
+  useEffect(() => {
+    if (!(user || loading)) {
+      router.push('/login');
+    }
+  }, [user, loading]);
+ 
+  return <p>Redirecting...</p>;
 }
