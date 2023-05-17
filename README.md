@@ -32,9 +32,24 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=<your-measurement-id>
 
 You can find these details in your Firebase project settings under the "General" tab.
 
-Install the dependencies by running npm install or yarn install in the project directory.
+Install the dependencies by running `npm install`,  `yarn install` or `pnpm install` in the project directory.
 
-Start the development server by running npm run dev or yarn dev.
+Start the development server by running:
+``` bash
+npm run dev
+``` 
+with npm
+
+``` bash
+yarn dev
+``` 
+with yarn
+
+``` bash
+pnpm dev
+``` 
+with pnpm
+
 
 Open your web browser and navigate to http://localhost:3000.
 
