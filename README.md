@@ -9,8 +9,8 @@
 This project is a template for setting up a login system using Firebase with Next.js. It allows users to sign up, log in, and log out using a Firebase account. Users can also log in with Google and soon Apple account (still in dev).
 
 <p align="center">
-  <a href="https://skillicons.dev">
-    <img src="./image/README/1684391640874.png" />
+  <a href="https://skillicons.dev" >
+    <img src="./image/README/1684391640874.png" style="height: 600px; width:470px;" />
   </a>
 </p>
 
