@@ -6,16 +6,26 @@
   </a>
 </p>
 
-This project is a template for setting up a login system using Firebase with Next.js. It allows users to sign up, log in, and log out using a Firebase account.
+This project is a template for setting up a login system using Firebase with Next.js. It allows users to sign up, log in, and log out using a Firebase account. Users can also log in with Google and soon Apple account (still in dev).
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="./image/README/1684391640874.png" />
+  </a>
+</p>
 
 # Prerequisites
+
 To run this project, you will need to have the following installed on your computer:
 
 Node.js
 npm, yarn or pnpm
-A Firebase account and a Firebase project with authentication enabled
+A Firebase account and a Firebase project with authentication enabled.
+
+If you want to allow apple login, you should also have an Apple Developer account.
 
 # Getting Started
+
 Clone the repository to your local machine.
 
 In the project directory, create a .env.local file and add your Firebase project configuration details in the following format:
@@ -35,21 +45,24 @@ You can find these details in your Firebase project settings under the "General"
 Install the dependencies by running `npm install`,  `yarn install` or `pnpm install` in the project directory.
 
 Start the development server by running:
-``` bash
+
+```bash
 npm run dev
-``` 
+```
+
 with npm
 
-``` bash
+```bash
 yarn dev
-``` 
+```
+
 with yarn
 
-``` bash
+```bash
 pnpm dev
-``` 
-with pnpm
+```
 
+with pnpm
 
 Open your web browser and navigate to http://localhost:3000.
 
@@ -74,7 +87,9 @@ firebase.js: Contains Firebase configuration details and initializes the Firebas
 auth.js: Contains functions for user authentication, such as sign up, log in, and log out.
 
 ## Contributing
+
 If you find any issues or have suggestions for improvement, please feel free to open an issue or submit a pull request.
 
 ## License
+
 This project is licensed under the MIT License.
