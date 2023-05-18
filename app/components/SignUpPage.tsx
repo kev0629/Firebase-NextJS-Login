@@ -1,13 +1,22 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Apple from './../assets/apple.svg'
-import Google from './../assets/google.svg'
+import Apple from './../assets/apple.svg';
+import Google from './../assets/google.svg';
+
+import Loading from './Loading';
+
+import { useRouter } from 'next/navigation';
+import {useAuthState} from 'react-firebase-hooks/auth'
+import { getAuth, createUserWithEmailAndPassword, confirmPasswordReset } from "firebase/auth";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth)
+  const router = useRouter()
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -23,8 +32,38 @@ const SignUpPage = () => {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // console.log(password!='' && (password === confirmPassword))
+    if (password!='' && (password === confirmPassword)){
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          // console.log(user)
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    }
     // Ajoutez ici la logique de création de compte
   };
+
+  if (loading){
+    return (
+      <div className="flex justify-center items-center h-screen bg-blue-500">
+        <Loading/>
+      </div>)
+  }
+  if (user){
+    router.push('/dashboard')
+    return(
+      <div className="flex justify-center items-center h-screen bg-blue-500">
+        <Loading/>
+      </div>
+    )
+  }
 
   return (
     <div className="flex justify-center items-center h-screen bg-blue-500">

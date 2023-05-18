@@ -4,6 +4,8 @@ import {useAuthState} from 'react-firebase-hooks/auth'
 import { useRouter } from "next/navigation";
 import { initFirebase } from '../firebaseApp'
 
+import Loading from "../components/Loading";
+
 export default function Home() {
     const app =  initFirebase()
     const auth = getAuth()
@@ -11,11 +13,14 @@ export default function Home() {
     const router = useRouter()
 
     if (loading){
-        return <div>Loading ...</div>
+        return (
+        <div className="flex justify-center items-center h-screen bg-blue-500">
+            <Loading/>
+        </div>)
       }
       if (!user){
         router.push('/login')
-        return<div>Please Login to continue</div>
+        return<div className="flex justify-center items-center h-screen bg-blue-500 text-white">Please Login to continue</div>
       }
       console.log(user, auth)
   return (

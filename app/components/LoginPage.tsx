@@ -4,12 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Apple from './../assets/apple.svg'
 import Google from './../assets/google.svg'
+import Loading from './Loading';
 
 import {useAuthState} from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/navigation';
 
 import { initFirebase } from '../firebaseApp'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 
 
 const LoginPage = () => {
@@ -21,7 +22,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const router = useRouter()
 
-  const signIn = async () => {
+  const signInWithGoogle = async () => {
     const result = await signInWithPopup( auth, provider)
     console.log(result.user)
   }
@@ -35,15 +36,32 @@ const LoginPage = () => {
   };
 
   if (loading){
-    return <div>Loading ...</div>
+    return (
+      <div className="flex justify-center items-center h-screen bg-blue-500">
+        <Loading/>
+      </div>)
   }
   if (user){
     router.push('/dashboard')
-    return<div>Loading ...</div>
+    return(
+      <div className="flex justify-center items-center h-screen bg-blue-500">
+        <Loading/>
+      </div>
+    )
   }
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Ajoutez ici la logique de connexion
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
   };
 
   return (
@@ -84,7 +102,7 @@ const LoginPage = () => {
           </button>
             <div
               className="bg-white w-full m-2 hover:bg-gray-100 text-gray-500 border font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-2"
-              onClick={signIn}
+              onClick={signInWithGoogle}
             >
               <i className="fab fa-google not-italic"><Image src={Google} className="inline-block mx-2" alt="Apple logo"/>Se connecter avec Google</i>
             </div>
