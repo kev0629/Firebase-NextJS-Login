@@ -1,14 +1,20 @@
 "use client";
 import React, { useState } from 'react';
-import Image from 'next/image';
-import Apple from './../assets/apple.svg';
-import Google from './../assets/google.svg';
+
+import { AppleLoginButton } from "./AppleLoginButton";
+import { GoogleLogin } from "./GoogleLogin";
 
 import Loading from './Loading';
 
 import { useRouter } from 'next/navigation';
 import {useAuthState} from 'react-firebase-hooks/auth'
-import { getAuth, createUserWithEmailAndPassword, confirmPasswordReset } from "firebase/auth";
+import { 
+  getAuth,
+  createUserWithEmailAndPassword, 
+  confirmPasswordReset,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "firebase/auth";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -17,6 +23,11 @@ const SignUpPage = () => {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth)
   const router = useRouter()
+  const provider = new GoogleAuthProvider();
+
+  const signInWithGoogle = async () => {
+    const result = await signInWithPopup(auth, provider);
+  };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -114,16 +125,8 @@ const SignUpPage = () => {
           >
             Créer un compte
           </button>
-          <div
-              className="bg-white w-full m-2 hover:bg-gray-100 text-gray-500 border font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-2"
-            >
-              <i className="fab fa-google not-italic"><Image src={Google} className="inline-block mx-2" alt="Apple logo"/>Créer un compte avec Google</i>
-            </div>
-            <div
-              className="bg-black w-full m-2 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              <i className="fab fa-apple not-italic"><Image src={Apple} className="inline-block mx-2" alt="Apple logo"/>Créer un compte avec Apple</i>
-            </div>
+          <GoogleLogin signInWithGoogle={signInWithGoogle}/>
+          {/* <AppleLoginButton /> */}
         </div>
       </form>
     </div>

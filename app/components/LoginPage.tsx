@@ -1,31 +1,33 @@
 "use client";
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import Apple from './../assets/apple.svg'
-import Google from './../assets/google.svg'
-import Loading from './Loading';
+import React, { useState } from "react";
+import Link from "next/link";
+import Loading from "./Loading";
 
-import {useAuthState} from 'react-firebase-hooks/auth'
-import { useRouter } from 'next/navigation';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/navigation";
 
-import { initFirebase } from '../firebaseApp'
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
-
+import { initFirebase } from "../firebaseApp";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { AppleLoginButton } from "./AppleLoginButton";
+import { GoogleLogin } from "./GoogleLogin";
 
 const LoginPage = () => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  const app =  initFirebase()
-  const [user, loading] = useAuthState(auth)
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter()
+  const app = initFirebase();
+  const [user, loading] = useAuthState(auth);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const signInWithGoogle = async () => {
-    const result = await signInWithPopup( auth, provider)
-    console.log(result.user)
-  }
+    const result = await signInWithPopup(auth, provider);
+  };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -35,40 +37,47 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
-  if (loading){
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-screen bg-blue-500">
-        <Loading/>
-      </div>)
-  }
-  if (user){
-    router.push('/dashboard')
-    return(
-      <div className="flex justify-center items-center h-screen bg-blue-500">
-        <Loading/>
+        <Loading />
       </div>
-    )
+    );
+  }
+  if (user) {
+    router.push("/dashboard");
+    return (
+      <div className="flex justify-center items-center h-screen bg-blue-500">
+        <Loading />
+      </div>
+    );
   }
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Ajoutez ici la logique de connexion
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-blue-500">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleFormSubmit}>
+      <form
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        onSubmit={handleFormSubmit}
+      >
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="email"
+          >
             Adresse e-mail
           </label>
           <input
@@ -81,7 +90,10 @@ const LoginPage = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="password"
+          >
             Mot de passe
           </label>
           <input
@@ -100,32 +112,23 @@ const LoginPage = () => {
           >
             Se connecter
           </button>
-            <div
-              className="bg-white w-full m-2 hover:bg-gray-100 text-gray-500 border font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-2"
-              onClick={signInWithGoogle}
-            >
-              <i className="fab fa-google not-italic"><Image src={Google} className="inline-block mx-2" alt="Apple logo"/>Se connecter avec Google</i>
-            </div>
-            <div
-              className="bg-black w-full m-2 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              <i className="fab fa-apple not-italic"><Image src={Apple} className="inline-block mx-2" alt="Apple logo"/>Se connecter avec Apple</i>
-            </div>
+          <GoogleLogin signInWithGoogle={signInWithGoogle}/>
+          {/* <AppleLoginButton /> */}
         </div>
         <div className="text-center mt-4">
-        <Link
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href='/signup'
-            >
-              Créer un compte
-            </Link>
+          <Link
+            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            href="/signup"
+          >
+            Créer un compte
+          </Link>
           <div>
             <Link
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="/forgot"
-          >
-            Mot de passe oublié ?
-          </Link>
+              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              href="/forgot"
+            >
+              Mot de passe oublié ?
+            </Link>
           </div>
         </div>
       </form>
