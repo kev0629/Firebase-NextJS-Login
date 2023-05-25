@@ -10,7 +10,7 @@ type GoogleLoginProps = {
 export const GoogleLogin = (props: GoogleLoginProps) => {
   return (
     <div
-      className="bg-white w-full m-2 hover:bg-gray-100 text-gray-500 border font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-2"
+      className="bg-white w-full m-2 hover:bg-gray-100 text-gray-500 border font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-2 cursor-pointer"
       onClick={props.signInWithGoogle}
     >
       <i className="fab fa-google not-italic">

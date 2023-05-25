@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 import { AppleLoginButton } from "./AppleLoginButton";
 import { GoogleLogin } from "./GoogleLogin";
@@ -127,6 +128,14 @@ const SignUpPage = () => {
           </button>
           <GoogleLogin signInWithGoogle={signInWithGoogle}/>
           {/* <AppleLoginButton /> */}
+        </div>
+        <div className="text-center mt-4">
+          <Link
+            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            href="/login"
+          >
+            Vous avez déjà un compte ? Se connecter
+          </Link>
         </div>
       </form>
     </div>
