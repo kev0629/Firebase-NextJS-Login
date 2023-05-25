@@ -6,7 +6,7 @@ import Loading from "./Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 
-import { initFirebase } from "../firebaseApp";
+import { initFirebase } from "../firebase/firebaseApp";
 import {
   getAuth,
   signInWithPopup,

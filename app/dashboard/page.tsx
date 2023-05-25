@@ -2,7 +2,7 @@
 import { getAuth } from "firebase/auth";
 import {useAuthState} from 'react-firebase-hooks/auth'
 import { useRouter } from "next/navigation";
-import { initFirebase } from '../firebaseApp'
+import { initFirebase } from '../firebase/firebaseApp'
 
 import Loading from "../components/Loading";
 
