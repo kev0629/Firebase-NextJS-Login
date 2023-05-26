@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { AppleLoginButton } from "./AppleLoginButton";
 import { GoogleLogin } from "./GoogleLogin";
+import { initFirebase } from "../firebase/firebaseApp";
 
 import Loading from './Loading';
 
@@ -21,6 +22,7 @@ const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [app] = initFirebase();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth)
   const router = useRouter()
@@ -138,6 +140,9 @@ const SignUpPage = () => {
           </Link>
         </div>
       </form>
+      <div className=" absolute bottom-10 text-center text-white">
+          By KS Project
+      </div>
     </div>
   );
 };

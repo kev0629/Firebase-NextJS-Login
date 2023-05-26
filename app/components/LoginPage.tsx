@@ -13,13 +13,14 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
 import { AppleLoginButton } from "./AppleLoginButton";
 import { GoogleLogin } from "./GoogleLogin";
 
 const LoginPage = () => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  const app = initFirebase();
+  const [app] = initFirebase();
   const [user, loading] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,17 +40,13 @@ const LoginPage = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-blue-500">
         <Loading />
-      </div>
     );
   }
   if (user) {
     router.push("/dashboard");
     return (
-      <div className="flex justify-center items-center h-screen bg-blue-500">
         <Loading />
-      </div>
     );
   }
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,7 +65,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-blue-500">
+    <div className="flex flex-col justify-center items-center h-screen bg-blue-500">
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleFormSubmit}
@@ -132,6 +129,9 @@ const LoginPage = () => {
           </div>
         </div>
       </form>
+      <div className=" absolute bottom-10 text-center text-white">
+          By KS Project
+      </div>
     </div>
   );
 };

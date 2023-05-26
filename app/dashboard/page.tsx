@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { initFirebase } from '../firebase/firebaseApp'
 
 import Loading from "../components/Loading";
+import Dashboard from "../components/Dashboard";
 
 export default function Home() {
     const app =  initFirebase()
@@ -14,20 +15,13 @@ export default function Home() {
 
     if (loading){
         return (
-        <div className="flex justify-center items-center h-screen bg-blue-500">
-            <Loading/>
-        </div>)
+          <Loading/>)
       }
       if (!user){
         router.push('/login')
         return<div className="flex justify-center items-center h-screen bg-blue-500 text-white">Please Login to continue</div>
       }
-      console.log(user, auth)
   return (
-    <main className="">
-        <button className="border m-2 p-2 rounded-xl" onClick={()=>auth.signOut()}>
-            Logout
-        </button>
-    </main>
+    <Dashboard/>
   )
 }
