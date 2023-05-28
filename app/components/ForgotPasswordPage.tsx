@@ -46,6 +46,9 @@ const ForgotPasswordPage = () => {
           </Link>
         </div>
       </form>
+      <div className=" absolute bottom-10 text-center text-white">
+          By KS Project
+      </div>
     </div>
   );
 };
