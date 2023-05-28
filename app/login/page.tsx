@@ -1,11 +1,10 @@
-'use client'
-import LoginPage from "../components/LoginPage"
-
+'use client';
+import LoginPage from '../components/LoginPage';
 
 export default function Home() {
-  return (
-    <main className="">
-      <LoginPage/>
-    </main>
-  )
+	return (
+		<main className=''>
+			<LoginPage />
+		</main>
+	);
 }
