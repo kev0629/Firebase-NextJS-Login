@@ -3,7 +3,7 @@ lockfileVersion: '6.0'
 dependencies:
   '@firebase/firestore':
     specifier: ^3.12.1
-    version: 3.12.1
+    version: 3.12.1(@firebase/app@0.9.10)
   '@types/node':
     specifier: 20.1.5
     version: 20.1.5
@@ -387,12 +387,13 @@ packages:
       - encoding
     dev: false
 
-  /@firebase/firestore@3.12.1:
+  /@firebase/firestore@3.12.1(@firebase/app@0.9.10):
     resolution: {integrity: sha512-TgJup6AIAT9/u7MxdCeES/I96kJx7DLBTokOlW4FiiSCeOzyss9BYBrh1tkkXNIpFn9mUsvT44foZvFsOKp14Q==}
     engines: {node: '>=10.10.0'}
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
+      '@firebase/app': 0.9.10
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
