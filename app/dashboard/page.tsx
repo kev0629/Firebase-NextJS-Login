@@ -1,17 +1,18 @@
-"use client";
-import { getAuth } from "firebase/auth";
-import {useAuthState} from 'react-firebase-hooks/auth'
-import { useRouter } from "next/navigation";
-import { initFirebase } from '../firebase/firebaseApp'
+'use client';
+import { getAuth } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useRouter } from 'next/navigation';
+import { initFirebase } from '../firebase/firebaseApp';
 
-import Loading from "../components/Loading";
-import Dashboard from "../components/Dashboard";
+import Loading from '../components/Loading';
+
 
 export default function Home() {
-    const app =  initFirebase()
-    const auth = getAuth()
-    const [user, loading] = useAuthState(auth)
-    const router = useRouter()
+	const app = initFirebase();
+	const auth = getAuth();
+	const [user, loading] = useAuthState(auth);
+	const router = useRouter();
+
 
     if (loading){
         return (
